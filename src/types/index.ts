@@ -1,3 +1,13 @@
+export enum Tool {
+  POINTER = "POINTER",
+  GRAB = "GRAB",
+  RECTANGLE = "RECTANGLE",
+  CIRCLE = "CIRCLE",
+  TEXT = "TEXT",
+  PENCIL = "PENCIL",
+  LINE = "LINE",
+}
+
 export enum ShapeType {
   RECTANGLE = "RECTANGLE",
   CIRCLE = "CIRCLE",
@@ -9,10 +19,15 @@ export interface Placement2D {
   x: number;
   y: number;
 }
-
-export interface Size2D {
+export interface Size {
   width: number;
   height: number;
+}
+
+export interface CommonStyle {
+  fill: string;
+  stroke: string;
+  strokeWidth: number;
 }
 
 export interface CommonShape extends Placement2D {
@@ -21,11 +36,11 @@ export interface CommonShape extends Placement2D {
   type: ShapeType;
 }
 
-export interface Rectangle extends CommonShape, Size2D {
+export interface Rectangle extends CommonShape, Size, CommonStyle {
   type: ShapeType.RECTANGLE;
 }
 
-export interface Circle extends CommonShape {
+export interface Circle extends CommonShape, Size, CommonStyle {
   type: ShapeType.CIRCLE;
   radiusX: number;
   radiusY: number;
@@ -34,9 +49,10 @@ export interface Circle extends CommonShape {
 export interface Text extends CommonShape {
   type: ShapeType.TEXT;
   text: string;
+  fontSize: number;
 }
 
-export interface Line extends CommonShape {
+export interface Line extends CommonShape, CommonStyle {
   type: ShapeType.LINE;
   points: number[];
 }
